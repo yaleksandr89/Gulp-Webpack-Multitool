@@ -1,0 +1,19 @@
+@import "normalize";
+@import "smart-grid";
+@import "variables";
+@import "fonts";
+@import "mixins";
+@import "functions";
+
+.debugGrid {
+  @include debug(rgba(0, 0, 0, 0.4), 1px solid #ff0);
+}
+
+* {
+  color: $color_text;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}

@@ -1,0 +1,70 @@
+* {
+  color: $color_text;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+html, body {
+  height: 100%;
+}
+
+header, footer {
+  background-color: $bg_dark;
+  text-align: center;
+
+  nav {
+    justify-content: center !important;
+  }
+
+  .navbar-collapse {
+    flex-grow: 0;
+  }
+}
+
+.email-layout {
+  .form-group {
+    select.form-control{
+      height: 130px;
+    }
+    label {
+      font-weight: 600;
+    }
+
+    small {
+      color: $red !important;
+      height: 20px;
+    }
+  }
+
+  .form-control {
+    &:focus {
+      border-color: rgba(73, 80, 87, 0.50);
+      box-shadow: 0 0 0 0.2rem rgba(73, 80, 87, 0.25);
+    }
+  }
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+footer {
+  display: flex;
+  flex-wrap: wrap;
+  height: 56px;
+
+  .container {
+    align-self: center;
+  }
+}
+
+.currentDate {
+  color: #fff;
+  font-size: 1.25rem;
+  margin-bottom: 0;
+}
