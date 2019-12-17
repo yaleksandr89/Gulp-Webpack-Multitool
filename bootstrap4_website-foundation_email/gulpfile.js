@@ -124,6 +124,7 @@ function email() {
         `${devPath.dest}/template/email/**/*.html`,
         `${devPath.dest}/template/email/*.txt`
     ])
+        .pipe(inky())
         .pipe(gulp.dest(`${prodPath.dest}/template/email`))
         .pipe(gulpif(isSync, browserSync.stream()));
 }
@@ -131,7 +132,6 @@ function email() {
 function email_styles() {
     return gulp.src(`${devPath.dest}/scss/email/email.scss`)
         .pipe(plumber())
-        .pipe(gulpif(isDevelopment, sourcemaps.init()))
         .pipe(sass().on('error', sass.logError))
         .pipe(ggcmq())
         .pipe(autoprefixer({
@@ -141,7 +141,6 @@ function email_styles() {
         .pipe(gulpif(!isDevelopment/* isProduction */, cleanCSS({
             level: 2
         })))
-        .pipe(gulpif(isDevelopment, sourcemaps.write()))
         .pipe(gulp.dest(`${prodPath.dest}/css`))
         .pipe(gulpif(isSync, browserSync.stream()));
 }
@@ -152,7 +151,7 @@ function email_layout() {
         .pipe(inky())
         .pipe(inlineCss({
             preserveMediaQueries: true,
-            removeLinkTags: true
+            removeLinkTags: false
         }))
         .pipe(gulp.dest(`${prodPath.dest}/template/email/inline`))
         .pipe(gulpif(isSync, browserSync.stream()));
