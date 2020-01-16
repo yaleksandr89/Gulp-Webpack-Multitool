@@ -2,7 +2,7 @@ const gulp = require('gulp');
 const del = require('del');
 const gulpif = require('gulp-if');
 const plumber = require('gulp-plumber');
-const rigger = require('gulp-rigger');
+const includer = require('gulp-include');
 const sass = require('gulp-sass');
 const autoprefixer = require('gulp-autoprefixer');
 const cleanCSS = require('gulp-clean-css');
@@ -33,7 +33,7 @@ const syncConfig = {
         baseDir: './public/',
     },
      */
-    proxy: 'email.loc',
+    proxy: 'NAME VIRTUAL HOSTS',
     logPrefix: 'limbo-zone',
     // tunnel: true,
     // https: false,
@@ -94,11 +94,13 @@ function scripts() {
 function fonts() {
     return gulp.src(`${devPath.dest}/font/**/*`)
         .pipe(gulp.dest(`${prodPath.dest}/font`))
+        .pipe(gulpif(isSync, browserSync.stream()));
 }
 
 function images() {
     return gulp.src(`${devPath.dest}/image/**/*`)
         .pipe(gulp.dest(`${prodPath.dest}/image`))
+        .pipe(gulpif(isSync, browserSync.stream()));
 }
 
 function php() {
@@ -108,8 +110,11 @@ function php() {
 }
 
 function entry_point() {
-    return gulp.src(`${devPath.dest}/*.php`)
-        .pipe(rigger())
+    return gulp.src([
+        `${devPath.dest}/*.php`,
+        `!${devPath.dest}/template`
+    ])
+        .pipe(includer()).on('error', console.log)
         .pipe(gulp.dest(prodPath.dest))
         .pipe(gulpif(isSync, browserSync.stream()));
 }
@@ -121,12 +126,13 @@ function watch() {
     gulp.watch(`${devPath.dest}/scss/**/*.scss`, styles);
     gulp.watch(`${devPath.dest}/js/**/*.js`, scripts);
     gulp.watch(`${devPath.dest}/image/**/*`, images);
+    gulp.watch(`${devPath.dest}/font/**/*`, fonts);
     gulp.watch(`${devPath.dest}/php/**/*.php`, php);
-    gulp.watch(`${devPath.dest}/*.php`, entry_point);
+    gulp.watch(`${devPath.dest}/**/*.php`, entry_point);
 }
 
 let build = gulp.series(removal,
-    gulp.parallel(styles, scripts, php, entry_point, fonts, images)
+    gulp.parallel(styles, scripts, php, fonts, images, entry_point)
 );
 
 gulp.task('del', removal);

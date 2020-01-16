@@ -38,6 +38,7 @@ $(function () {
                     if (result === 'ok') {
                         $('#submit').text('Отправлено').toggleClass('btn-warning btn-success').prop('disabled', true);
                         setTimeout(function () {
+                            $('.email-layout').find('input').val('');
                             $('#submit').text('Отправить').toggleClass('btn-success btn-outline-dark').prop('disabled', false);
                         }, 1000);
                         console.log('Письмо отправлено');

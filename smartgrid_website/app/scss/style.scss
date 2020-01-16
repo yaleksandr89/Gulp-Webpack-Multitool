@@ -5,13 +5,9 @@
 @import "mixins";
 @import "functions";
 
-.debugGrid {
-  @include debug(rgba(0, 0, 0, 0.4), 1px solid #ff0);
-}
-
-* {
-  color: $color_text;
-}
+//.debugGrid {
+//  @include debug(rgba(0, 0, 0, 0.4), 1px solid #ff0);
+//}
 
 img {
   max-width: 100%;

@@ -1,4 +1,3 @@
-<?php $emailTmp = glob(__DIR__ . '/template/email' . '/*.html'); ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -8,20 +7,20 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" href="image/logotype.png" type="image/png">
     <link rel="stylesheet" href="css/style.css">
-    <title>Layout of the letters</title>
+    <title>Gulp&Webpack с Bootstrap 4.4.1</title>
 </head>
 <body class="wrapper">
-//= template/header.php
+//=include template/header.php
 <main>
     <div class="container main">
         <div class="ror justify-content-center">
             <div class="col-md-12">
-                <h1>TEST</h1>
+                <h1>Main zone</h1>
             </div>
         </div>
     </div>
 </main>
-//= template/footer.php
+//=include template/footer.php
 <script type='text/javascript' src='js/script.js'></script>
 </body>
 </html>

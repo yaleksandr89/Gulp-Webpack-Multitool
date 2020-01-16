@@ -91,7 +91,7 @@ class FreakMailer extends PHPMailer
 
     private function loadHtmlTemplate($template)
     {
-        $emailTemplate = file_get_contents("{$this->emailTemplatesDir}/{$template}.html");
+        $emailTemplate = file_get_contents("{$this->emailTemplatesDir}/inline/{$template}.html");
         if ($emailTemplate === false) {
             throw new RuntimeException("Выбранный для отправки письма шаблон: '{$template}', не существует или поврежден!");
         }

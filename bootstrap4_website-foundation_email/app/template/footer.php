@@ -18,7 +18,9 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <img src="image/email/<?= pathinfo($file, PATHINFO_FILENAME) ?>.jpg" alt="<?= pathinfo($file, PATHINFO_FILENAME) ?>">
+                    <a href="image/email/<?= pathinfo($file, PATHINFO_FILENAME) ?>.jpg" title="Открыть в новом окне" target="_blank">
+                        <img src="image/email/<?= pathinfo($file, PATHINFO_FILENAME) ?>.jpg" alt="<?= pathinfo($file, PATHINFO_FILENAME) ?>">
+                    </a>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-dark w-100"

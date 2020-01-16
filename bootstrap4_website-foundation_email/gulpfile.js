@@ -8,6 +8,7 @@ const autoprefixer = require('gulp-autoprefixer');
 const cleanCSS = require('gulp-clean-css');
 const sourcemaps = require('gulp-sourcemaps');
 const ggcmq = require('gulp-group-css-media-queries');
+//const rename = require('gulp-rename');
 const webpackStream = require('webpack-stream');
 const browserSync = require('browser-sync').create();
 // for the email layouts
@@ -82,6 +83,9 @@ function styles() {
         .pipe(gulpif(!isDevelopment/* isProduction */, cleanCSS({
             level: 2
         })))
+        // .pipe(rename({
+        //     suffix: '.min'
+        // }))
         .pipe(gulpif(isDevelopment, sourcemaps.write()))
         .pipe(gulp.dest(`${prodPath.dest}/css`))
         .pipe(gulpif(isSync, browserSync.stream()));
@@ -130,7 +134,11 @@ function email() {
 }
 
 function email_styles() {
-    return gulp.src(`${devPath.dest}/scss/email/email.scss`)
+    return gulp.src([
+        `${devPath.dest}/scss/email/tmp1.scss`,
+        `${devPath.dest}/scss/email/tmp2.scss`,
+        `${devPath.dest}/scss/email/email-signature.scss`
+    ])
         .pipe(plumber())
         .pipe(sass().on('error', sass.logError))
         .pipe(ggcmq())

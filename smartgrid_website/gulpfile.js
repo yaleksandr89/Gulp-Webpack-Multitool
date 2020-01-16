@@ -2,7 +2,7 @@ const gulp = require('gulp');
 const del = require('del');
 const gulpif = require('gulp-if');
 const plumber = require('gulp-plumber');
-const rigger = require('gulp-rigger');
+const includer = require('gulp-include');
 const sass = require('gulp-sass');
 const smart_grid = require('smart-grid');
 const autoprefixer = require('gulp-autoprefixer');
@@ -35,7 +35,7 @@ const syncConfig = {
         baseDir: './public/',
     },
      */
-    proxy: 'cp.loc',
+    proxy: 'tmp.loc',
     logPrefix: 'limbo-zone',
     // tunnel: true,
     // https: false,
@@ -73,7 +73,7 @@ function styles() {
         .pipe(gulpif(isDevelopment, sourcemaps.init()))
         .pipe(sass({
             includePaths: require('node-normalize-scss').includePaths
-        }))
+        }).on('error', sass.logError))
         .pipe(ggcmq())
         .pipe(autoprefixer({
             overrideBrowserslist: ['> 0.1%'],
@@ -105,19 +105,27 @@ function scripts() {
 function fonts() {
     return gulp.src(`${devPath.dest}/font/**/*`)
         .pipe(gulp.dest(`${prodPath.dest}/font`))
+        .pipe(gulpif(isSync, browserSync.stream()));
 }
 
 function images() {
     return gulp.src(`${devPath.dest}/image/**/*`)
         .pipe(gulp.dest(`${prodPath.dest}/image`))
+        .pipe(gulpif(isSync, browserSync.stream()));
 }
 
-function html() {
+function php() {
+    return gulp.src(`${devPath.dest}/php/**/*.php`)
+        .pipe(gulp.dest(`${prodPath.dest}/php`))
+        .pipe(gulpif(isSync, browserSync.stream()));
+}
+
+function entry_point() {
     return gulp.src([
-        `${devPath.dest}/**/*.html`,
-        `!${devPath.dest}/template/**/*`
+        `${devPath.dest}/*.php`,
+        `!${devPath.dest}/template`
     ])
-        .pipe(rigger())
+        .pipe(includer()).on('error', console.log)
         .pipe(gulp.dest(prodPath.dest))
         .pipe(gulpif(isSync, browserSync.stream()));
 }
@@ -126,14 +134,17 @@ function watch() {
     if (isSync) {
         browserSync.init(syncConfig);
     }
-    gulp.watch(`${devPath.dest}/scss/**/*.scss`, styles);
     gulp.watch('./smartgrid.js', smartGrid);
+    gulp.watch(`${devPath.dest}/scss/**/*.scss`, styles);
     gulp.watch(`${devPath.dest}/js/**/*.js`, scripts);
-    gulp.watch(`${devPath.dest}/**/*.html`, html);
+    gulp.watch(`${devPath.dest}/image/**/*`, images);
+    gulp.watch(`${devPath.dest}/font/**/*`, fonts);
+    gulp.watch(`${devPath.dest}/php/**/*.php`, php);
+    gulp.watch(`${devPath.dest}/**/*.php`, entry_point);
 }
 
 let build = gulp.series(removal,
-    gulp.parallel(styles, scripts, html, fonts, images)
+    gulp.parallel(styles, scripts, php, fonts, images, entry_point)
 );
 
 gulp.task('del', removal);
