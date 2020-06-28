@@ -17,8 +17,8 @@
     "jquery": "^3.5.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.9.0",
-    "@babel/preset-env": "^7.9.0",
+    "@babel/core": "^7.10.3",
+    "@babel/preset-env": "^7.10.3",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
     "browser-sync": "^2.26.7",
@@ -31,11 +31,11 @@
     "gulp-if": "^3.0.0",
     "gulp-include": "^2.4.1",
     "gulp-plumber": "^1.2.1",
-    "gulp-sass": "^4.0.2",
+    "gulp-sass": "^4.1.0",
     "gulp-sourcemaps": "^2.6.5",
-    "node-normalize-scss": "^8.0.1",
+    "node-normalize-scss": "^8.0.2",
     "smart-grid": "^2.1.2",
-    "webpack": "^4.41.2",
+    "webpack": "^4.43.0",
     "webpack-stream": "^5.2.1"
   }
 }

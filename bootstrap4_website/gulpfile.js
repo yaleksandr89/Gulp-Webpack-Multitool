@@ -27,18 +27,21 @@ let prodPath = {
 const syncConfig = {
     /**
      *  This optional used fot the work php files
-     *   proxy: '{SITENAME.LOC}',
-     *
-     server: {
-        baseDir: './public/',
-    },
+     *  proxy: '{SITENAME.LOC}',
      */
-    proxy: 'NAME VIRTUAL HOSTS',
+    server: 'XXX',
     logPrefix: 'limbo-zone',
-    // tunnel: true,
-    // https: false,
-    // port: 9000,
-    // notify: false
+    notify: false,
+    open: true,
+    cors: true
+    /**
+     proxy: 'NAME VIRTUAL HOSTS',
+     logPrefix: 'limbo-zone',
+     tunnel: true,
+     https: false,
+     port: 9000,
+     notify: false
+     */
 };
 
 let webConfig = {
