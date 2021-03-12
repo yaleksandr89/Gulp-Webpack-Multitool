@@ -13,17 +13,17 @@
   "author": "Aleksandr Yurchenko",
   "license": "MIT",
   "dependencies": {
-    "core-js": "^3.6.4",
-    "jquery": "^3.5.0"
+    "core-js": "^3.9.1",
+    "jquery": "^3.6.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.10.3",
-    "@babel/preset-env": "^7.10.3",
+    "@babel/core": "^7.13.10",
+    "@babel/preset-env": "^7.13.10",
     "babel-eslint": "^10.1.0",
-    "babel-loader": "^8.1.0",
-    "browser-sync": "^2.26.10",
-    "del": "^5.1.0",
-    "eslint": "^6.8.0",
+    "babel-loader": "^8.2.2",
+    "browser-sync": "^2.26.14",
+    "del": "^6.0.0",
+    "eslint": "^7.21.0",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
     "gulp-clean-css": "^4.3.0",
@@ -32,10 +32,10 @@
     "gulp-include": "^2.4.1",
     "gulp-plumber": "^1.2.1",
     "gulp-sass": "^4.1.0",
-    "gulp-sourcemaps": "^2.6.5",
-    "node-normalize-scss": "^8.0.2",
+    "gulp-sourcemaps": "^3.0.0",
+    "node-normalize-scss": "^8.1.2",
     "smart-grid": "^2.1.2",
-    "webpack": "^4.43.0",
-    "webpack-stream": "^5.2.1"
+    "webpack": "^5.25.0",
+    "webpack-stream": "^6.1.2"
   }
 }
